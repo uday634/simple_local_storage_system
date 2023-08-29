@@ -59,4 +59,3 @@ btn.addEventListener("click", (e) => {
     })
 
   });
-console.log(none)  
