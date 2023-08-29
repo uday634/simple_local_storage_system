@@ -5,8 +5,9 @@ var number = document.getElementById("phone");
 var list = document.getElementById("list");
 var container = document.getElementById("container");
   //fetching the data
+  var url = 'https://crudcrud.com/api/690c50c5561b4bd6855abd543452c79d/AppData'
 axios
-  .get('https://crudcrud.com/api/a5c9153548244b31a6b0cb44e73daad8/AppData')
+  .get(url)
   .then((response)=>{
     var data = response.data;
     console.log(data)
@@ -27,11 +28,27 @@ function creatingList(name1value, emailValue, numbervalue, id ){
   var edit = document.createElement("button");
   delbtn.addEventListener('click',(e)=>{
     axios
-    .delete('https://crudcrud.com/api/a5c9153548244b31a6b0cb44e73daad8/AppData/'+id)
+    .delete(url+'/'+id)
     .then((res)=>console.log(res))
     .catch((err)=>console.log(err))
     li.remove()
   })
+
+  //edit the code
+  edit.addEventListener('click', (e)=>{
+    axios
+      .delete(url+'/'+id)
+      .then((res)=>{
+        name1.value = name1value;
+        email1.value = emailValue;
+        number.value = numbervalue;
+        li.remove()
+      })
+  })
+
+
+  //edit the 
+
   delbtn.innerText = "Delete";
   edit.innerText = "edit";
 
@@ -59,12 +76,12 @@ btn.addEventListener("click", (e) => {
   };
   axios
     .post(
-      "https://crudcrud.com/api/a5c9153548244b31a6b0cb44e73daad8/AppData",
+      url,
       obj
     )
     .then((res)=>{
       var id = res.data._id;
-      creatingList(name, email, phonenumber,id )
+      creatingList(name, email, phone,id )
     })
     .catch();
 
