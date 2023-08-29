@@ -3,6 +3,7 @@ var email = document.getElementById("email");
 var btn = document.getElementById("button");
 var number = document.getElementById("phone");
 var list = document.getElementById("list");
+var container = document.getElementById('container')
 
 name1.addEventListener("keyup", (e) => {
   var name_val = e.target.value;
@@ -37,7 +38,10 @@ btn.addEventListener("click", (e) => {
       phonenumber: number.value,
     };
     let newObj = JSON.stringify(obj);
-    localStorage.setItem(emailValue, newObj);
+    axios
+      .post('https://crudcrud.com/api/fe03d5caab3548adb8278ee7c1838a3b/AppointmentData',obj)
+      .then((res)=>console.log(res))
+      .catch((err)=>console.log(err))
   
     delbtn.addEventListener("click", (e) => {
       var emailToRemove = li.getAttribute("data-email");
@@ -53,5 +57,6 @@ btn.addEventListener("click", (e) => {
         localStorage.removeItem(emailToRemove);
 
     })
+
   });
   
